@@ -6,7 +6,20 @@ class AuthStore extends ChangeNotifier {
   final SharedPreferences prefs;
   bool _loggedIn = false;
   String _token = '';
-  late final User user;
+  late User user = User(
+    id: 0,
+    firstname: '',
+    lastname: '',
+    userType: '',
+    walletBalance: 0,
+    totalContacts: 0,
+    phone: '',
+    email: '',
+    avatar: '',
+    status: false,
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
 
   AuthStore(this.prefs) {
     loggedIn = prefs.getBool('LoggedIn') ?? false;

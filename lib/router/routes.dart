@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:subapp/screens/Home.dart';
 import 'package:subapp/screens/dashboard/dashboard.dart';
 import 'package:subapp/screens/login.dart';
+import 'package:subapp/screens/peers.dart';
 import 'package:subapp/screens/purchase.dart';
 import 'package:subapp/screens/settings.dart';
 import 'package:subapp/stores/auth_store.dart';
@@ -43,6 +44,12 @@ class AppRouter {
             path: '/purchase',
             name: 'purchase',
             builder: (context, state) => const Purchase(),
+          ),
+          GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
+            path: '/friends',
+            name: 'friends',
+            builder: (context, state) => const PeerFriends(),
           ),
         ],
       ),

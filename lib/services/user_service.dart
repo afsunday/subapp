@@ -41,7 +41,7 @@ class UserService {
         'Authorization': 'Bearer $_token',
       },
     );
-    return jsonDecode(response.body);
+    return response;
   }
 
   Future<http.Response> post(dynamic body) async {

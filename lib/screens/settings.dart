@@ -47,16 +47,26 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<AuthStore>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          title: Text('Settings',
-              style: TextStyle(
-                  color: Colors.grey[500], fontWeight: FontWeight.normal)),
-          leading: const Icon(Icons.arrow_back, size: 28, color: Colors.grey),
-          elevation: 0.5,
-          shadowColor: Colors.grey[200],
-          backgroundColor: Colors.white),
+        title: Text(
+          'Settings',
+          style: TextStyle(
+            color: Colors.grey[700],
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        leading: InkWell(
+          onTap: () => context.pop(),
+          child: Icon(Icons.arrow_back, size: 28, color: Colors.grey[700]),
+        ),
+        elevation: 0.5,
+        shadowColor: Colors.grey[200],
+        backgroundColor: Colors.white,
+      ),
       body: SafeArea(
         child: Scrollbar(
           child: ListView(
@@ -82,11 +92,13 @@ class _SettingsState extends State<Settings> {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Afuwape sunday',
-                              style: TextStyle(fontSize: 20.0)),
-                          Gap(3),
-                          Text('Account details',
+                        children: [
+                          Text(
+                            '${store.user.firstname} ${store.user.lastname}',
+                            style: const TextStyle(fontSize: 20.0),
+                          ),
+                          const Gap(3),
+                          const Text('Account details',
                               style: TextStyle(fontSize: 12.0))
                         ],
                       ),

@@ -59,7 +59,7 @@ class _MainLayoutState extends State<MainLayout> {
         return 0;
       case '/purchase':
         return 1;
-      case '/contacts':
+      case '/friends':
         return 2;
       case '/settings':
         return 3;
@@ -75,7 +75,7 @@ class _MainLayoutState extends State<MainLayout> {
       case 1:
         return context.go('/purchase');
       case 2:
-        return context.go('/contacts');
+        return context.go('/friends');
       case 3:
         return context.push('/settings');
       default:
