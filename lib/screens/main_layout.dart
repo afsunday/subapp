@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:subapp/stores/auth_store.dart';
+import 'package:subapp/stores/peer_store.dart';
 
 class AppState {
   static Map<int, String> mapScreen = {};
@@ -19,34 +20,45 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  // int _selectedIndex = 0;
   @override
-  Widget build(BuildContext context) {    
-    return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _onItemTapped,
-        currentIndex: setIndex(), // _calculateSelectedIndex(context),
-        unselectedItemColor: Colors.black26,
-        selectedItemColor: Colors.black87,
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(Icons.house, size: 25.0),
-          ),
-          BottomNavigationBarItem(
-            label: 'Purchase',
-            icon: Icon(Icons.store, size: 25.0),
-          ),
-          BottomNavigationBarItem(
-            label: 'Contacts',
-            icon: Icon(Icons.contacts, size: 25.0),
-          ),
-          BottomNavigationBarItem(
-            label: 'More',
-            icon: Icon(Icons.apps, size: 25.0),
-          ),
-        ],
+  Widget build(BuildContext context) {
+    final authToken = Provider.of<AuthStore>(context).token;
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PeerStore>(
+            lazy: false, create: (context) => PeerStore(authToken)),
+      ],
+      child: Builder(
+        builder: (BuildContext context) {
+          return Scaffold(
+            body: widget.child,
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: _onItemTapped,
+              currentIndex: setIndex(), // _calculateSelectedIndex(context),
+              unselectedItemColor: Colors.black26,
+              selectedItemColor: Colors.black87,
+              items: const [
+                BottomNavigationBarItem(
+                  label: 'Home',
+                  icon: Icon(Icons.house, size: 25.0),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Purchase',
+                  icon: Icon(Icons.store, size: 25.0),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Contacts',
+                  icon: Icon(Icons.contacts, size: 25.0),
+                ),
+                BottomNavigationBarItem(
+                  label: 'More',
+                  icon: Icon(Icons.apps, size: 25.0),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

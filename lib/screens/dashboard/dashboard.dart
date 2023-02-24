@@ -146,7 +146,7 @@ class HistoryTile extends StatelessWidget {
     this.borderBottom = true,
   }) : super(key: key);
 
-  Map<String, dynamic> colors = {
+  final Map<String, dynamic> colors = {
     "mtn.png": Colors.yellow[100],
     "9mobile.png": Colors.green[100],
     "glo.png": Colors.green[100],

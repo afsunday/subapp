@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:subapp/models/peers_model.dart';
 
 class UserService {
   static const String baseUrl = 'https://api1.logicdev.com.ng/api';
@@ -32,7 +33,7 @@ class UserService {
     return jsonDecode(response.body);
   }
 
-  Future<http.Response> getUserPeers() async {
+  Future<PeerData> getUserPeers(context) async {
     final url = Uri.parse('$baseUrl/peers');
     final response = await http.get(
       url,
@@ -41,7 +42,9 @@ class UserService {
         'Authorization': 'Bearer $_token',
       },
     );
-    return response;
+
+    var result = jsonDecode(response.body)['data'];
+    return PeerData.fromJson(result);
   }
 
   Future<http.Response> post(dynamic body) async {
